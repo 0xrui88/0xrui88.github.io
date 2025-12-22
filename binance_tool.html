@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>币安活动助手 - 加密锐锐 @0xrui88</title>
+    <style>
+        :root {
+            --binance-yellow: #f0b90b; 
+            --binance-black: #1e2026;
+            --binance-gray: #474d57;
+            --success-green: #2bda80;
+            --bg-color: #0b0e11; 
+            --card-bg: #ffffff;
+            --link-hover: #c99400;
+        }
+
+        body {
+            font-family: 'BinancePlex', 'Segoe UI', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--binance-black);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            width: 100%;
+            max-width: 850px;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            box-sizing: border-box;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--binance-yellow);
+            padding-bottom: 15px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 26px;
+            color: var(--binance-black);
+            font-weight: 800;
+        }
+
+        /* 作者及求关注文案样式 */
+        .author-line {
+            margin-top: 12px;
+            font-size: 14px;
+            color: var(--binance-gray);
+            line-height: 1.6;
+        }
+
+        .author-line a {
+            color: var(--binance-black);
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0 2px;
+            border-bottom: 1px solid var(--binance-yellow);
+            transition: all 0.2s;
+        }
+
+        .author-line a:hover {
+            color: var(--link-hover);
+            background-color: #fff9e6;
+        }
+
+        .follow-call {
+            margin-left: 10px;
+            color: #d93025; /* 略带醒目的红色系或深色 */
+            font-weight: bold;
+        }
+
+        textarea {
+            width: 100%;
+            height: 160px;
+            padding: 12px;
+            border: 1px solid #dae0e6;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 14px;
+            line-height: 1.5;
+            background-color: #fafafa;
+            margin-bottom: 20px;
+            font-family: monospace;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto auto;
+            gap: 15px;
+            align-items: end;
+            margin-bottom: 25px;
+        }
+
+        .input-box label {
+            display: block;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--binance-gray);
+        }
+
+        input[type="number"], input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dae0e6;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+            outline: none;
+        }
+
+        button {
+            padding: 0 24px;
+            background-color: var(--binance-yellow);
+            color: var(--binance-black);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            height: 45px;
+            transition: all 0.2s;
+        }
+
+        button:hover { background-color: #fcd535; transform: translateY(-1px); }
+        button.secondary { background-color: #eaecef; color: var(--binance-black); }
+        button.copy-btn { background-color: var(--success-green); color: white; display: none; }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .result-area {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            min-height: 80px;
+        }
+
+        .word-tag {
+            background-color: var(--binance-black);
+            color: var(--binance-yellow);
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        footer {
+            margin-top: 30px;
+            color: #848e9c;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        @media (max-width: 650px) {
+            .controls { grid-template-columns: 1fr 1fr; }
+            .author-line { display: flex; flex-direction: column; }
+            .follow-call { margin-left: 0; margin-top: 5px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>🟡 币安活动助手</h1>
+        <div class="author-line">
+            作者：<a href="https://x.com/0xrui88" target="_blank">加密锐锐</a> | 
+            <a href="https://x.com/0xrui88" target="_blank">@0xrui88</a> 
+            <a href="https://x.com/0xrui88" target="_blank" class="follow-call">🚀 关注X帐号，后续会更新更多活动，祝各位早日财富自由(点击关注)</a>
+        </div>
+    </header>
+
+    <label style="font-weight: bold; font-size: 14px; color: var(--binance-gray);">1. 粘贴活动文本：</label>
+    <textarea id="sourceText">Have a #MerryBinance: Open Your Christmas Calendar and Share Up to $1.8M+ in Rewards
+
+Main Takeaways
+
+Check the #MerryBinance Calendar daily (Dec 17–24) to unlock new promotions and rewards, including a welcome gift worth up to $300.
+
+Complete festive missions and activities to grab your share of up to $1.8M+ in rewards.
+
+Stay tuned for more updates during the month on our social media channels.
+
+The holidays are fast approaching, and that means a time to reflect and give back to our amazing community. To celebrate your unwavering support over the past year, we’ve lined up a festive array of activities and rewards—including the #MerryBinance Christmas Calendar.
+
+And rest assured, our holiday celebrations are open to everyone, whether you’re new to Binance or an OG user. 
+
+Unveiling this Year’s #MerryBinance Christmas Calendar
+
+From now until December 24, visit the Christmas Calendar daily to gain access to exclusive promotions and new surprises, with each day offering something unique. Ring in the holidays and head into the new year with your very own share of $1.8M in rewards.
+
+How to join the Christmas Calendar
+
+Login to the #MerryBinance Calendar daily.
+
+Click an icon card on the calendar to unveil a new promotion, which will be unlocked at 00:00 (UTC) daily.
+
+Start day one of your calendar with a free welcome gift worth up to $300 in tokens (depending on your regional eligibility).
+
+Please note: Rewards will be distributed according to the terms specified in each promotion. Products and services referred to on the #MerryBinance Calendar may not be available in your region.
+
+👉Claim and open your #MerryBinance welcome gift
+
+Share your Binance resolutions
+
+Take part in an exclusive #MerryBinance social giveaway and get a chance to win your share of 2,500 USDC.
+
+Here’s how it works:
+
+Follow Binance on our social media channels, including X and Instagram.
+
+Tag a friend and share your Binance resolutions with #MerryBinance.
+
+Complete a short survey that will be posted on our official X on December 18.
+
+The ten most creative, authentic, and unique responses will take home a festive bag of crypto rewards.
+
+Stay Close to the Holiday Action
+
+Follow Binance on X, Instagram, Telegram, LinkedIn, and check Binance Square for daily updates on new promotions and surprises. 
+
+From all of us at Binance, we hope you have a very #MerryBinance. We can’t wait for you to uncover the surprises, presents, and activities in store for you. 
+
+👉Visit your #MerryBinance Christmas Calendar
+
+Further Reading
+
+Your 2025 End-of-Year Holiday Gift Guide With Binance Pay
+
+Binance Discount Buy – Here's How You Can Buy Crypto Below Market Price or Earn Rewards
+
+Buy Crypto on Binance and Earn Rewards</textarea>
+
+    <div class="controls">
+        <div class="input-box">
+            <label>单词长度</label>
+            <input type="number" id="wordLength" value="8">
+        </div>
+        <div class="input-box">
+            <label>输入包含的字母</label>
+            <input type="text" id="mustContain" placeholder="如: AE" style="text-transform: uppercase;">
+        </div>
+        <button onclick="extractWords()">🔍 筛选单词</button>
+        <button class="secondary" onclick="location.reload()">🔄 重置</button>
+    </div>
+
+    <div class="stats-bar">
+        <span id="stats" style="font-size: 14px; font-weight: bold;">等待筛选...</span>
+        <button id="copyBtn" class="copy-btn" onclick="copyResults()">📋 复制结果</button>
+    </div>
+
+    <div class="result-area" id="resultContainer">
+        <div style="color: #999; text-align: center; width: 100%; margin-top: 30px;">输入长度并点击筛选按钮开始</div>
+    </div>
+
+    <footer>
+        © 2025 币安活动助手 | 由 <a href="https://x.com/0xrui88" target="_blank" style="color:#848e9c; text-decoration: underline;">加密锐锐</a> 强力驱动
+    </footer>
+</div>
+
+<script>
+    let currentResults = [];
+
+    function extractWords() {
+        const text = document.getElementById('sourceText').value;
+        const targetLen = parseInt(document.getElementById('wordLength').value);
+        const containStr = document.getElementById('mustContain').value.toLowerCase();
+        const resultContainer = document.getElementById('resultContainer');
+        const stats = document.getElementById('stats');
+        const copyBtn = document.getElementById('copyBtn');
+
+        let words = text.match(/\b[a-zA-Z]+\b/g);
+        if (!words) {
+            resultContainer.innerHTML = '<div style="color: #999; text-align: center; width: 100%; margin-top: 30px;">未检测到单词</div>';
+            return;
+        }
+
+        let filtered = words.filter(word => {
+            const lowerWord = word.toLowerCase();
+            if (word.length !== targetLen) return false;
+            if (containStr) {
+                for (let char of containStr) {
+                    if (!lowerWord.includes(char)) return false;
+                }
+            }
+            return true;
+        });
+
+        currentResults = [...new Set(filtered.map(w => w.toUpperCase()))].sort();
+
+        resultContainer.innerHTML = '';
+        if (currentResults.length > 0) {
+            currentResults.forEach(word => {
+                const tag = document.createElement('span');
+                tag.className = 'word-tag';
+                tag.textContent = word;
+                resultContainer.appendChild(tag);
+            });
+            stats.innerText = `✅ 成功提取 ${currentResults.length} 个单词`;
+            copyBtn.style.display = 'block';
+        } else {
+            resultContainer.innerHTML = '<div style="color: #999; text-align: center; width: 100%; margin-top: 30px;">未找到匹配条件的单词</div>';
+            stats.innerText = '结果：0';
+        }
+    }
+
+    function copyResults() {
+        if (currentResults.length === 0) return;
+        navigator.clipboard.writeText(currentResults.join('\n')).then(() => {
+            const btn = document.getElementById('copyBtn');
+            btn.innerText = '✅ 复制成功!';
+            setTimeout(() => btn.innerText = '📋 复制结果', 2000);
+        });
+    }
+</script>
+
+</body>
+</html>
